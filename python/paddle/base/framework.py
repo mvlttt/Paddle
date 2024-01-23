@@ -19,6 +19,7 @@ import copy
 import functools
 import multiprocessing
 import os
+import shlex
 import re
 import subprocess
 import sys
@@ -5655,7 +5656,7 @@ class IrGraph:
         def _convert_to_pdf(dot_file_path):
             pdf_save_path = os.path.splitext(dot_file_path)[0] + '.pdf'
             exited_code = subprocess.call(
-                'dot -Tpdf ' + dot_file_path + ' -o ' + pdf_save_path,
+                'dot -Tpdf ' + shlex.quote(dot_file_path) + ' -o ' + shlex.quote(pdf_save_path),
                 shell=True,
             )
             if exited_code != 0:
